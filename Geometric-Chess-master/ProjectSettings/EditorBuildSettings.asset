@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 24ee742a859af2547ad0e35088fdfa90
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: 345558d45072e67478b68c3e4f245693
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: eb728ff538ca99f4e8f50e037b0da3e4
+  - enabled: 1
+    path: Assets/Scenes/puzzelChess.unity
+    guid: cf27a078217c5c44398f3083adbc6f77
+  - enabled: 1
+    path: Assets/Scenes/onlineMenu.unity
+    guid: 2a8b5ccfd1d1b0242a082556bb2bb3db
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 1d9ef7fb28a351c458b5659b40347b08
+  - enabled: 1
+    path: Assets/Scenes/onlineMain.unity
+    guid: 22802095b1607d24da8b22cb5fd79b4f
+  m_configObjects: {}
