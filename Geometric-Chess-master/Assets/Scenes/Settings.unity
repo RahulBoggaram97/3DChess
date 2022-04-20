@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 371259312}
   - component: {fileID: 371259311}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: mylight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1030,7 +1030,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 853776580}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: SliderValueTimer, Assembly-CSharp
         m_MethodName: OnValueChanged
         m_Mode: 1
         m_Arguments:
@@ -1207,7 +1207,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 910771995}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: ToggleValue, Assembly-CSharp
         m_MethodName: OnValueChanged
         m_Mode: 1
         m_Arguments:
@@ -1684,7 +1684,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1236941198}
-        m_TargetAssemblyTypeName: 
+        m_TargetAssemblyTypeName: SliderValueScore, Assembly-CSharp
         m_MethodName: OnValueChanged
         m_Mode: 1
         m_Arguments:
