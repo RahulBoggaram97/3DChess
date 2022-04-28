@@ -255,7 +255,7 @@ namespace com.impactional.chess
 
 			//PhotonNetwork.AllocateViewID(pieceObject);
 
-			_lobbyManager.transferOwnership(pieceObject, playerType);
+			//_lobbyManager.transferOwnership(pieceObject, playerType);
 	
 			//assign mat and player type
 			Material mat = null;

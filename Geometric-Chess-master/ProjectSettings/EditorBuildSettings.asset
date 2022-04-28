@@ -24,6 +24,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Main.unity
     guid: 1d9ef7fb28a351c458b5659b40347b08
   - enabled: 1
+    path: Assets/Scenes/tournament/TournamentMenu.unity
+    guid: 0a5b415f9a2808f46931aae4c47803bb
+  - enabled: 1
+    path: Assets/Scenes/spinWheel.unity
+    guid: d656cecda65c39941b98f3312d05f58f
+  - enabled: 1
     path: Assets/Scenes/onlineMain.unity
     guid: 22802095b1607d24da8b22cb5fd79b4f
   m_configObjects: {}

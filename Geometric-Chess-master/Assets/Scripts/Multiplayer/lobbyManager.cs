@@ -11,17 +11,45 @@ namespace com.impactional.chess
     {
 
 
-        int viewIdCounter = 3;
+        static int viewIdCounter = 3;
 
-        
+        public GameObject lobbyCanvas;
+        public GameObject chessBoard;
 
-        public gridMulti grid;
+        private void Start()
+        {
+            updateLobbyData();
+        }
 
 
-     
+        public void updateLobbyData()
+        {
+            photonView.RPC("updateLobbyDataRPC", RpcTarget.AllBufferedViaServer);
+        }
+
+        [PunRPC]
+        public void updateLobbyDataRPC()
+        {
+
+            if (PhotonNetwork.PlayerList.Length == 2)
+            {
+                lobbyCanvas.SetActive(false);
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+
+               if(PhotonNetwork.IsMasterClient)
+                chessBoard.GetPhotonView().RPC("SpawnAllPieces", RpcTarget.All);
+
+            }
+
+        }
 
 
-        public void transferOwnership(GameObject piece, MultiPlayerType playerType)
+
+
+
+
+
+        public static void transferOwnership(GameObject piece, int team)
         {
 
             piece.GetPhotonView().ViewID = viewIdCounter;
@@ -30,23 +58,14 @@ namespace com.impactional.chess
             if (PhotonNetwork.IsMasterClient)
             {
 
-                
-
-               
-
-                
-
-                
-
                 Debug.Log("after the id was : " + piece.GetPhotonView().ViewID);
 
-
-                switch (playerType)
+                switch (team)
                 {
-                    case MultiPlayerType.white:
+                    case 0:
                         piece.GetPhotonView().TransferOwnership(PhotonNetwork.PlayerList[0]);
                         break;
-                    case MultiPlayerType.black:
+                    case 1:
                         piece.GetPhotonView().TransferOwnership(PhotonNetwork.PlayerList[1]);
                         break;
                 }
