@@ -883,7 +883,7 @@ public class puzzleChessBoard : MonoBehaviour
     {
         uiPanel.SetActive(true);
         retryButton.SetActive(true);
-        nextPuzzleButton.SetActive(false);
+        nextPuzzleButton.SetActive(true);
     }
 
     public void endPuzzle()
@@ -1408,7 +1408,7 @@ public class puzzleChessBoard : MonoBehaviour
         SpawnAllPieces();
         uiPanel.SetActive(false);
         retryButton.SetActive(false);
-        nextPuzzleButton.SetActive(false);
+        nextPuzzleButton.SetActive(true);
 
     }
 
@@ -1420,7 +1420,7 @@ public class puzzleChessBoard : MonoBehaviour
         puzzleApiCaller.fetchPuzzle();
         uiPanel.SetActive(false);
         retryButton.SetActive(false);
-        nextPuzzleButton.SetActive(false);
+        nextPuzzleButton.SetActive(true);
 
     }
     

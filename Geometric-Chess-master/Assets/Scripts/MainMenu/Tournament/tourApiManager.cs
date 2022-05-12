@@ -12,6 +12,7 @@ public class tourApiManager : MonoBehaviour
 
     private void Start()
     {
+        loadingScreen.SetActive(true);
         getAlltournamnets();
 
     }
@@ -21,6 +22,8 @@ public class tourApiManager : MonoBehaviour
     public GameObject placeToInstantateCards;
     public GameObject playerCard;
     public GameObject playerCardSpawnTransform;
+
+    public GameObject loadingScreen;
 
 
     [Header("other scripts")]
@@ -145,6 +148,7 @@ public class tourApiManager : MonoBehaviour
             if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
             {
                 Debug.Log(request.error);
+                loadingScreen.GetComponentInChildren<Text>().text = "Sorry couldn't load. the error is " + request.error; 
 
             }
             else
@@ -187,7 +191,7 @@ public class tourApiManager : MonoBehaviour
                     
                 }
 
-
+                loadingScreen.SetActive(false);
 
 
             }

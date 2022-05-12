@@ -71,8 +71,8 @@ using UnityEngine.Networking;
                     else canSpin = false;
                     Debug.Log(request.downloadHandler.text);
                     Debug.Log(canSpin);
-                    
-                    
+
+                spinManager.updateWheelState(spinState.spinAble);
 
                 }
 

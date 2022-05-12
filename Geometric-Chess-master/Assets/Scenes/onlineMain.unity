@@ -1095,6 +1095,7 @@ GameObject:
   - component: {fileID: 1589218616}
   - component: {fileID: 1589218615}
   - component: {fileID: 1589218614}
+  - component: {fileID: 1589218617}
   m_Layer: 0
   m_Name: table
   m_TagString: Untagged
@@ -1178,6 +1179,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1589218612}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1589218617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589218612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479f53e140ae1844397f62036a15778b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1589954459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2597,7 +2610,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -542.0012, y: 0.000030517578}
+  m_AnchoredPosition: {x: -542.0012, y: 0}
   m_SizeDelta: {x: -1083.9822, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6981687998363484381

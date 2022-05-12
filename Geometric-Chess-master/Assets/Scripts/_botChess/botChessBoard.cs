@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using System.Threading.Tasks;
+using System;
 
-public class singlePlayerChessBoard : MonoBehaviour
+public class botChessBoard : MonoBehaviour
 {
-    
+
 
     [Header("Art Stuff")]
     [SerializeField] private float tileSize = 1.0f;
@@ -49,22 +52,22 @@ public class singlePlayerChessBoard : MonoBehaviour
     private List<Vector2Int[]> moveList = new List<Vector2Int[]>();
     private SpecialMoves specialMoves;
 
-    private chessPieceTypePuzzle promotionPieceType;
-  
+   
+
 
 
 
 
     private void Awake()
     {
-       
+
 
         currentCamera = Camera.main;
         tileMat = tileMat1;
 
         GenrateAllTiles(tileSize, TILE_COUNT_X, TILE_COUNT_Y);
         SpawnAllPieces();
-      
+
 
         isWhiteTurn = true;
     }
@@ -82,7 +85,7 @@ public class singlePlayerChessBoard : MonoBehaviour
 
         RaycastHit info;
         Ray ray = currentCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out info, 100, LayerMask.GetMask("Tile", "Hover", "Highlight", "checkedking")))
+        if (Physics.Raycast(ray, out info, 100, LayerMask.GetMask("Tile", "Hover", "Highlight")))
         {
             Vector2Int hitPos = lookUpTileIndex(info.transform.gameObject);
 
@@ -142,12 +145,18 @@ public class singlePlayerChessBoard : MonoBehaviour
                     currentDragging.setPostion(getTileCenter(prevPos.x, prevPos.y));
 
                 }
+                else
+                {
+                    //doAiChessMove();
+                }
 
 
                 currentDragging = null;
                 RemoveHighlightTiles();
 
-                
+               
+
+
             }
 
         }
@@ -246,7 +255,7 @@ public class singlePlayerChessBoard : MonoBehaviour
 
         int whiteTeam = 0, blackTeam = 1;
 
-     
+
 
         for (int i = 0; i < TILE_COUNT_X; i++)
         {
@@ -287,7 +296,7 @@ public class singlePlayerChessBoard : MonoBehaviour
 
         PositionAllPieces();
 
-       
+
 
     }
 
@@ -335,17 +344,17 @@ public class singlePlayerChessBoard : MonoBehaviour
         for (int i = 0; i < availableMoves.Count; i++)
         {
             tiles[availableMoves[i].x, availableMoves[i].y].layer = LayerMask.NameToLayer("Highlight");
-            if( chessPieces[availableMoves[i].x, availableMoves[i].y] != null )
-                tiles[availableMoves[i].x, availableMoves[i].y].layer = LayerMask.NameToLayer("checkedking");
         }
     }
 
     private void RemoveHighlightTiles()
     {
-        for (int i = 0; i < availableMoves.Count; i++)
-        {
-            tiles[availableMoves[i].x, availableMoves[i].y].layer = LayerMask.NameToLayer("Tile");
-        }
+      
+        for (int x = 0; x < TILE_COUNT_X; x++)
+            for (int y = 0; y < TILE_COUNT_Y; y++)
+
+                tiles[x, y].layer = LayerMask.NameToLayer("Tile");
+            
 
         availableMoves.Clear();
     }
@@ -669,7 +678,6 @@ public class singlePlayerChessBoard : MonoBehaviour
         //Are we in check right now?
         if (ContainsValidMove(ref currentlyAvailableMoves, new Vector2Int(targetKing.currentX, targetKing.currentY)))
         {
-            tiles[targetKing.currentX, targetKing.currentY].layer = LayerMask.NameToLayer("checkedking");
             //king is under attack, can we move something to help him?
             for (int i = 0; i < deffendingPieces.Count; i++)
             {
@@ -792,7 +800,7 @@ public class singlePlayerChessBoard : MonoBehaviour
 
         Vector2Int[] lastMove = moveList[moveList.Count - 1];
 
-      
+
         chessPiecePuzzle newQueen = spawnSinglePiece(chessPieceTypePuzzle.Queen, 0);
         newQueen.transform.position = chessPieces[lastMove[1].x, lastMove[1].y].transform.position;
         Destroy((chessPieces[lastMove[1].x, lastMove[1].y]).gameObject);
@@ -843,4 +851,144 @@ public class singlePlayerChessBoard : MonoBehaviour
 
         piecePromotionSelectionMenuPanel.SetActive(false);
     }
+
+
+    //chess bot ai
+    //List<chessPiecePuzzle> moveAbleBlackPieces = new List<chessPiecePuzzle>();
+    //chessPiecePuzzle PieceToMove;
+
+
+    //private void doAiChessMove()
+    //{
+    //    //get all the moveableBlackPieces
+    //    for (int x = 0; x < TILE_COUNT_X; x++)
+    //        for (int y = 0; y < TILE_COUNT_Y; y++)
+    //            if (chessPieces[x, y] != null)
+    //                if (chessPieces[x, y].team == 1)
+    //                    if (chessPieces[x, y].GetAvailMoves(ref chessPieces, TILE_COUNT_X, TILE_COUNT_Y).Any())
+    //                        moveAbleBlackPieces.Add(chessPieces[x, y]);
+
+
+    //    ChooseTheBestPieceToMove();
+    //}
+
+    //private void ChooseTheBestPieceToMove()
+    //{
+    //    PieceToMove = moveAbleBlackPieces[Random.Range(0, moveAbleBlackPieces.Count)];
+
+
+    //    Debug.Log("piece to move is :" + PieceToMove.gameObject.name + "(" + PieceToMove.currentX + ", " + PieceToMove.currentY + ")");
+
+    //    MoveThePiece();
+    //}
+
+    //private void MoveThePiece()
+    //{
+    //    currentDragging = PieceToMove;
+
+    //    availableMoves = PieceToMove.GetAvailMoves(ref chessPieces, TILE_COUNT_X, TILE_COUNT_Y);
+
+    //    specialMoves = PieceToMove.GetSpecialMoves(ref chessPieces, ref moveList, ref availableMoves);
+
+    //    PreventCheck();
+
+    //    if (!availableMoves.Any())
+    //    {
+    //        Debug.Log("ther are no available moves for the peice");
+    //        return;
+    //    }
+
+    //    //Vector2Int chosenMove = availableMoves[Random.Range(0, availableMoves.Count)];
+
+
+    //    MoveTo(PieceToMove, chosenMove.x, chosenMove.y);
+
+    //    moveAbleBlackPieces.Clear();
+    //}
+
+    //int Depth = 4;
+    //bool Running = false;
+    //bool stop = false;
+
+
+    //Vector2Int[] MiniMaxAb(ref chessPiecePuzzle[,] chessBoard, bool isWhiteTurns)
+    //{
+    //    Running = true;
+    //    stop = false;
+
+    //    //to do 
+    //    //make a funtion the gets all the moves possible
+    //    Dictionary<Vector2Int, List<Vector2Int>> moves = new Dictionary<Vector2Int, List<Vector2Int>>();
+
+    //    int[] bestResults = new int[moves.Count];
+    //    List<Vector2Int[]> bestMoves = new List<Vector2Int[]>(moves.Count);
+
+    //    Parallel.ForEach(moves, (moveList, state, index) =>
+    //    {
+    //        if (stop)
+    //        {
+    //            state.Stop();
+    //            return;
+    //        }
+
+    //        bestResults[index] = int.MinValue;
+    //        bestMoves.Insert(Convert.ToInt32(index), new Vector2Int[] { new Vector2Int(-1, -1), new Vector2Int(-1, -1) });
+
+    //        foreach (Vector2Int move in moveList.Value)
+    //        {
+    //            if (stop)
+    //            {
+    //                state.Stop();
+    //                return;
+    //            }
+
+    //            //to do
+    //            //make a funtion that moves the move we pass and returns a board postion
+    //            chessPiecePuzzle[,] b2 = new chessPiecePuzzle[TILE_COUNT_X, TILE_COUNT_Y];
+    //            //the mimab funtion
+    //            int result = 0;
+
+    //            if (bestResults[index] < result || (bestMoves[Convert.ToInt32(index)][1].Equals(new Vector2Int(-1, -1)) && bestResults[index] == int.MinValue))
+    //            {
+    //                bestResults[index] = result;
+    //                bestMoves[Convert.ToInt32(index)][0] = moveList.Key;
+    //                bestMoves[Convert.ToInt32(index)][1] = move;
+    //            }
+    //        }
+    //    });
+
+    //    if (stop)
+    //        return new Vector2Int[] { new Vector2Int(-1, -1), new Vector2Int(-1, -1) };
+
+    //    int best = int.MinValue;
+    //    Vector2Int[] m = new Vector2Int[] { new Vector2Int(-1, -1), new Vector2Int(-1, -1) };
+    //    for (int i = 0; i < bestMoves.Count; i++)
+    //    {
+
+    //        if (best < bestResults[i] || m[1].Equals(new Vector2Int(-1, -1)) && !bestMoves[i][1].Equals(new Vector2Int(-1, -1)))
+    //        {
+    //            best = bestResults[i];
+    //            m = bestMoves[i];
+    //        }
+    //    }
+    //    return m;
+
+    //}
+
+
+    //int miMaab(ref chessPiecePuzzle[,] board, int team, int depth, int alpha, int beta)
+    //{
+    //    //to do
+    //    //make a funtion where it can return depending on the state
+    //    if (depth >= Depth)
+    //        return 907897;
+    //    else
+    //    {
+    //        List<chessPiecePuzzle[,]> boards = new List<chessPiecePuzzle[,]?>();
+
+    //        foreach(Vector2Int pos in board)
+    //    }
+
+
+    //}
 }

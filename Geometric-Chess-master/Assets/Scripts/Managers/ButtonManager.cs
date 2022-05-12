@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour {
 
+	private void Start()
+	{
+		playerPermData.setLocalId("banaka1647929352758");
+	}
 
 	public GameObject profilePanel;
 
