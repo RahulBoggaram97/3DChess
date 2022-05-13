@@ -895,12 +895,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button
       objectReference: {fileID: 0}
-    - target: {fileID: 892880750079506236, guid: 7bcf3cefbb69736428aa55fa8ec86e45,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 3ac024d91835afc47b33765dc93122ca,
-        type: 3}
     - target: {fileID: 892880750079506239, guid: 7bcf3cefbb69736428aa55fa8ec86e45,
         type: 3}
       propertyPath: m_Pivot.x
@@ -939,7 +933,7 @@ PrefabInstance:
     - target: {fileID: 892880750079506239, guid: 7bcf3cefbb69736428aa55fa8ec86e45,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 120
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 892880750079506239, guid: 7bcf3cefbb69736428aa55fa8ec86e45,
         type: 3}
